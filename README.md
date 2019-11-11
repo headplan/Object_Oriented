@@ -1,4 +1,4 @@
-# Object-Oriented Programming
+# 设计模式 Design Pattern
 
-关于面向对象
+关于设计模式
 
