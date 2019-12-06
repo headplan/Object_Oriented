@@ -52,13 +52,13 @@ OOA , OOD , OOP三个放到一起 , 就是面向对象分析 , 设计 , 编程\(
 
 UML - Unified Model Language . 统一建模语言 . 很多讲解面向对象或设计模式的书 , 常用来画图 , 表达面向对象或设计模式的设计思路 .
 
-UML非常复杂 , 不仅包含类图 , 还有用例图 , 顺序图 , 活动图 , 状态图 , 组件图等等 , 学习成本较高 , 建议了解即可 . 
+UML非常复杂 , 不仅包含类图 , 还有用例图 , 顺序图 , 活动图 , 状态图 , 组件图等等 , 学习成本较高 , 建议了解即可 .
 
-当然 , 有不同的声音 , 可以看看下面的内容 : 
+当然 , 有不同的声音 , 可以看看下面的内容 :
 
 [https://mp.weixin.qq.com/s/7ZlZKWr-98fIXfPEZOGaMA](https://mp.weixin.qq.com/s/7ZlZKWr-98fIXfPEZOGaMA)
 
-也有先关书籍和工具 : 
+也有相关书籍和工具 :
 
 《Java Modeling In Color With UML》
 
