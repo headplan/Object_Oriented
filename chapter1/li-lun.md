@@ -61,6 +61,16 @@ Wallet类主要有四个属性 . 参照封装特性 , 对钱包的这四个属�
 
 对于balance属性 , 也就是钱包中的余额 . 只能增减 , 不存在重新设置 . 所以 , 这里只暴露了两个方法 , increaseBalance\(\)和decreaseBalance\(\) , 也没有暴露set方法 . balanceLastModifiedTime这个属性完全跟balance属性的修改操作绑定在一起 . 只有在balance修改的时候 , 它才会被修改 . 所以 , balanceLastModifiedTime的修改操作完全封装在了increaseBalance\(\)和decreaseBalance\(\)方法中 , 不对外暴露修改这个属性的方法和业务细节 , 也保证了balance和balanceLastModifiedTime的一致性 . 
 
+封装特性需要语言本身的语法支持 , 也就是**访问权限控制** . 
+
+#### 总结
+
+封装也叫做信息隐藏或者数据访问保护 . 类通过暴露有限的访问接口 , 授权外部仅能通过类提供的方式来访问内部信息或者数据 . 
+
+它需要编程语言提供权限访问控制语法来支持 , 例如Java中的private , protected , public关键字 . 
+
+封装特性存在的意义 , 一方面是保护数据不被随意修改 , 提高代码的可维护性 ; 另一方面是仅暴露有限的必要接口 , 提高类的易用性 . 
+
 #### 抽象\(Abstraction\)
 
 
