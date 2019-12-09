@@ -111,19 +111,19 @@ public class PictureStorage implements IPictureStorage {
 
 继承对于常见的面向对象编程语言来说并不陌生 , 是用来表示类之间的is-a关系 . 从继承关系上来讲 , 继承可以分为两种模式 , 单继承和多继承 . 单继承表示一个子类只继承一个父类 , 多继承表示一个子类可以继承多个父类 .
 
-为了实现继承这个特性 , 编程语言需要提供特殊的语法机制来支持 , 比如Java使用extends关键字来实现继承 , C++使用冒号\(class B : public A\) , Python使用paraentheses\(\) , Ruby使用&lt; . 不过 , 有些编程语言只支持单继承 , 不支持多继承 , 比如Java , PHP , C\# , Ruby等 , 而有些编程语言即支持单继承 , 也支持多继承 , 比如C++ , Python , Perl等 . 
+为了实现继承这个特性 , 编程语言需要提供特殊的语法机制来支持 , 比如Java使用extends关键字来实现继承 , C++使用冒号\(class B : public A\) , Python使用paraentheses\(\) , Ruby使用&lt; . 不过 , 有些编程语言只支持单继承 , 不支持多继承 , 比如Java , PHP , C\# , Ruby等 , 而有些编程语言即支持单继承 , 也支持多继承 , 比如C++ , Python , Perl等 .
 
-通过继承来关联两个类 , 反映真实世界中的关系 , 非常符合人类的认知 , 但过渡使用继承 , 继承层次过深过复杂 , 就会导致代码可读性 , 可维护性变差 . 子类和父类高度耦合 , 修改父类的代码 , 会直接影响到子类 . 
+通过继承来关联两个类 , 反映真实世界中的关系 , 非常符合人类的认知 , 但过渡使用继承 , 继承层次过深过复杂 , 就会导致代码可读性 , 可维护性变差 . 子类和父类高度耦合 , 修改父类的代码 , 会直接影响到子类 .
 
-所以 , 继承特性也是有争议的 , 也有人剔除继承是一种反模式 , 提倡多用组合少用继承 . 
+所以 , 继承特性也是有争议的 , 也有人剔除继承是一种反模式 , 提倡多用组合少用继承 .
 
 #### 总结
 
-继承是用来表示类之间的is-a关系 , 分为两种模式 : 单继承和多继承 . 单继承表示一个子类只继承一个父类 , 多继承表示一个子类可以继承多个父类 . 为了实现继承这个特性 , 编程语言需要提供特殊的语法机制来支持 . 继承主要是用来解决代码复用的问题 . 
+继承是用来表示类之间的is-a关系 , 分为两种模式 : 单继承和多继承 . 单继承表示一个子类只继承一个父类 , 多继承表示一个子类可以继承多个父类 . 为了实现继承这个特性 , 编程语言需要提供特殊的语法机制来支持 . 继承主要是用来解决代码复用的问题 .
 
 #### 多态\(Polymorphism\)
 
-多态是指 , 子类可以替换父类 , 在实际的代码运行过程中 , 调用子类的方法实现 . 
+多态是指 , 子类可以替换父类 , 在实际的代码运行过程中 , 调用子类的方法实现 .
 
 ```java
 public class DynamicArray {
@@ -131,15 +131,15 @@ public class DynamicArray {
     protected int size = 0;
     protected int capacity = DEFAULT_CAPACITY;
     protected Integer[] elements = new Integer[DEFAULT_CAPACITY];
-    
+
     public int size() { return this.size; }
     public Integer get(int index) { return elements[index]; }
-    
+
     public void add(Integer e) {
         ensureCapacity();
         elements[size++] = e;
     }
-    
+
     protected void ensureCapacity() {
         //... 如果数组满了就扩容... 代码省略...
     }
@@ -171,13 +171,23 @@ public class Example {
             System.out.println(dynamicArray.get(i));
         }
     }
-    
+
     public static void main(String args[]) {
         DynamicArray dynamicArray = new SortedDynamicArray();
         test(dynamicArray); // 打印结果:1,3,5
     }
 }
 ```
+
+多态这种特性也需要编程语言提供特殊的语法机制来实现 . 上面的代码用了三个语法机制来实现多态 : 
+
+* 第一个语法机制是编程语言要支持父类对象可以引用类对象 , 也就是可以将SortedDynamicArray传递给DynamicArray . 
+* 第二个语法机制是编程语言要支持继承 , 也就是SortedDynamicArray继承了DynamicArray , 才能将SortedDyamicArray传递给DynamicArray . 
+* 第三个语法机制是编程语言要支持子类可以重写\(override\)父类中的方法 , 也就是SortedDyamicArray重写了DynamicArray中的add\(\)方法 . 
+
+这三种语法机制配合在一起 , 实现了test\(\)方法中子类替换父类的add方法\(\) , 也就是实现了多态特性 . 
+
+对于多态特性的实现方式 , 除了利用"继承加方法重写"这种实现方式之外 , 还有其他两种比较常见的实现方式 , 一个是利用接口类语法 , 另一个是利用duck-typing语法 . 不过有的语言不支持 , 比如C++就不支持接口类的语法 , 而duck-typing只有一些动态语言才支持 . 
 
 
 
