@@ -59,19 +59,41 @@ Wallet类主要有四个属性 . 参照封装特性 , 对钱包的这四个属�
 
 从业务的角度来说 , id , createTime在创建钱包的时候就确定好了 , 之后不应该再被改动 . 所以在Wallet类中没有暴露任何修改这两个属性的方法 set都没有 . 这两个属性的初始化设置 , 对于Wallet类的调用者来说 , 应该也是透明的 . 这里在构造函数内将其初始化设置好了 , 而不是通过构造函数的参数来外部赋值 .
 
-对于balance属性 , 也就是钱包中的余额 . 只能增减 , 不存在重新设置 . 所以 , 这里只暴露了两个方法 , increaseBalance\(\)和decreaseBalance\(\) , 也没有暴露set方法 . balanceLastModifiedTime这个属性完全跟balance属性的修改操作绑定在一起 . 只有在balance修改的时候 , 它才会被修改 . 所以 , balanceLastModifiedTime的修改操作完全封装在了increaseBalance\(\)和decreaseBalance\(\)方法中 , 不对外暴露修改这个属性的方法和业务细节 , 也保证了balance和balanceLastModifiedTime的一致性 . 
+对于balance属性 , 也就是钱包中的余额 . 只能增减 , 不存在重新设置 . 所以 , 这里只暴露了两个方法 , increaseBalance\(\)和decreaseBalance\(\) , 也没有暴露set方法 . balanceLastModifiedTime这个属性完全跟balance属性的修改操作绑定在一起 . 只有在balance修改的时候 , 它才会被修改 . 所以 , balanceLastModifiedTime的修改操作完全封装在了increaseBalance\(\)和decreaseBalance\(\)方法中 , 不对外暴露修改这个属性的方法和业务细节 , 也保证了balance和balanceLastModifiedTime的一致性 .
 
-封装特性需要语言本身的语法支持 , 也就是**访问权限控制** . 
+封装特性需要语言本身的语法支持 , 也就是**访问权限控制** .
 
 #### 总结
 
-封装也叫做信息隐藏或者数据访问保护 . 类通过暴露有限的访问接口 , 授权外部仅能通过类提供的方式来访问内部信息或者数据 . 
+封装也叫做信息隐藏或者数据访问保护 . 类通过暴露有限的访问接口 , 授权外部仅能通过类提供的方式来访问内部信息或者数据 .
 
-它需要编程语言提供权限访问控制语法来支持 , 例如Java中的private , protected , public关键字 . 
+它需要编程语言提供权限访问控制语法来支持 , 例如Java中的private , protected , public关键字 .
 
-封装特性存在的意义 , 一方面是保护数据不被随意修改 , 提高代码的可维护性 ; 另一方面是仅暴露有限的必要接口 , 提高类的易用性 . 
+封装特性存在的意义 , 一方面是保护数据不被随意修改 , 提高代码的可维护性 ; 另一方面是仅暴露有限的必要接口 , 提高类的易用性 .
 
 #### 抽象\(Abstraction\)
+
+封装主要讲的是如何隐藏信息 , 保护数据 , 而抽象讲的是如何隐藏方法的具体实现 , 让调用者只需要关心方法提供了哪些功能 , 并不需要知道这些功能是如何实现的 . 在面向对象编程中 , 常借助编程语言提供的接口类\(interface\)或者抽象类\(abstract\)这两种语法机制 , 来实现抽象这一特性 . 
+
+```java
+public interface IPictureStorage {
+    void savePicture(Picture picture);
+    Image getPicture(String pictureId);
+    void deletePicture(String pictureId);
+    void modifyMetaInfo(String pictureId, PictureMetaInfo metaInfo);
+}
+
+public class PictureStorage implements IPictureStorage {
+    @Override
+    public void savePicture(Picture picture) { ... }
+    @Override
+    public Image getPicture(String pictureId) { ... }
+    @Override
+    public void deletePicture(String pictureId) { ... }
+    @Override
+    public void modifyMetaInfo(String pictureId, PictureMetaInfo metaInfo) { ... }
+}
+```
 
 
 
