@@ -187,7 +187,7 @@ public class Example {
 
 这三种语法机制配合在一起 , 实现了test\(\)方法中子类替换父类的add方法\(\) , 也就是实现了多态特性 .
 
-对于多态特性的实现方式 , 除了利用"继承加方法重写"这种实现方式之外 , 还有其他两种比较常见的实现方式 , **一个是利用接口类语法** , **另一个是利用duck-typing语法** . 不过有的语言不支持 , 比如C++就不支持接口类的语法 , 而duck-typing只有一些动态语言才支持 . 
+对于多态特性的实现方式 , 除了利用"继承加方法重写"这种实现方式之外 , 还有其他两种比较常见的实现方式 , **一个是利用接口类语法** , **另一个是利用duck-typing语法** . 不过有的语言不支持 , 比如C++就不支持接口类的语法 , 而duck-typing只有一些动态语言才支持 .
 
 #### 接口类实现多态特性
 
@@ -200,7 +200,7 @@ public interface Iterator {
 
 public class Array implements Iterator {
     private String[] data;
-    
+
     public String hasNext() { ... }
     public String next() { ... }
     public String remove() { ... }
@@ -208,7 +208,7 @@ public class Array implements Iterator {
 
 public class LinkedList implements Iterator {
     private LinkedListNode head;
-    
+
     public String hasNext() { ... }
     public String next() { ... }
     public String remove() { ... }
@@ -220,26 +220,41 @@ public class Demo {
             System.out.println(iterator.next());
         }
     }
-    
+
     public static void main(String[] args) {
         Iterator arrayIterator = new Array();
         print(arrayIterator);
-        
+
         Iterator linkedListIterator = new LinkedList();
         print(linkedListIterator);
     }
 }
 ```
 
-Iterator是一个接口类 , 定义了一个可以遍历集合数据的迭代器 . Array和LinkedList都实现了接口类 , 通过传递不同类型的实现类到print\(Iterator iterator\)函数中 , 支持动态的调用不同的next\(\) , hasNext\(\)实现 . 
+Iterator是一个接口类 , 定义了一个可以遍历集合数据的迭代器 . Array和LinkedList都实现了接口类 , 通过传递不同类型的实现类到print\(Iterator iterator\)函数中 , 支持动态的调用不同的next\(\) , hasNext\(\)实现 .
 
 #### Duck-typing来实现多态特性
 
 ```py
 class Logger:
     def record(self):
+        print("I write a log into file.")
         
+class DB:
+    def record(self):
+        print("I insert data into db.")
+        
+def test(recorder):
+    recorder.record()
+    
+def demo():
+    logger = Logger()
+    db = DB()
+    test(logger)
+    test(db)
 ```
 
+上面的代码可以发现 , duck-typing实现多态的方式非常灵活 . Logger和DB两个类没有任何关系 , 既不是继承关系 , 也不是接口和实现的关系 , 但是只要它们都有定义了record\(\)方法 , 就可以被传递到test\(\)方法中 , 在实际运行的时候 , 执行对应的record\(\)方法 . 
 
+也就是说 , 只要两个类具有相同的方法 , 就可以实现多态 , 并不要求两个类之间有任何关系 , 这就是所谓的duck-typing , 是一些动态语言所特有的语法机制 . 而像Java这样的静态语言 , 通过继承实现多态特性 , 必须要求两个类之间有继承关系 , 通过接口实现多态特性 , 类必须实现对应的接口 . 
 
