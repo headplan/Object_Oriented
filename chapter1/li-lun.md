@@ -179,15 +179,67 @@ public class Example {
 }
 ```
 
-多态这种特性也需要编程语言提供特殊的语法机制来实现 . 上面的代码用了三个语法机制来实现多态 : 
+多态这种特性也需要编程语言提供特殊的语法机制来实现 . 上面的代码用了三个语法机制来实现多态 :
 
 * 第一个语法机制是编程语言要支持父类对象可以引用类对象 , 也就是可以将SortedDynamicArray传递给DynamicArray . 
 * 第二个语法机制是编程语言要支持继承 , 也就是SortedDynamicArray继承了DynamicArray , 才能将SortedDyamicArray传递给DynamicArray . 
 * 第三个语法机制是编程语言要支持子类可以重写\(override\)父类中的方法 , 也就是SortedDyamicArray重写了DynamicArray中的add\(\)方法 . 
 
-这三种语法机制配合在一起 , 实现了test\(\)方法中子类替换父类的add方法\(\) , 也就是实现了多态特性 . 
+这三种语法机制配合在一起 , 实现了test\(\)方法中子类替换父类的add方法\(\) , 也就是实现了多态特性 .
 
-对于多态特性的实现方式 , 除了利用"继承加方法重写"这种实现方式之外 , 还有其他两种比较常见的实现方式 , 一个是利用接口类语法 , 另一个是利用duck-typing语法 . 不过有的语言不支持 , 比如C++就不支持接口类的语法 , 而duck-typing只有一些动态语言才支持 . 
+对于多态特性的实现方式 , 除了利用"继承加方法重写"这种实现方式之外 , 还有其他两种比较常见的实现方式 , **一个是利用接口类语法** , **另一个是利用duck-typing语法** . 不过有的语言不支持 , 比如C++就不支持接口类的语法 , 而duck-typing只有一些动态语言才支持 . 
+
+#### 接口类实现多态特性
+
+```java
+public interface Iterator {
+    String hasNext();
+    String next();
+    String remove();
+}
+
+public class Array implements Iterator {
+    private String[] data;
+    
+    public String hasNext() { ... }
+    public String next() { ... }
+    public String remove() { ... }
+}
+
+public class LinkedList implements Iterator {
+    private LinkedListNode head;
+    
+    public String hasNext() { ... }
+    public String next() { ... }
+    public String remove() { ... }
+}
+
+public class Demo {
+    private static void print(Iterator iterator) {
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+    
+    public static void main(String[] args) {
+        Iterator arrayIterator = new Array();
+        print(arrayIterator);
+        
+        Iterator linkedListIterator = new LinkedList();
+        print(linkedListIterator);
+    }
+}
+```
+
+Iterator是一个接口类 , 定义了一个可以遍历集合数据的迭代器 . Array和LinkedList都实现了接口类 , 通过传递不同类型的实现类到print\(Iterator iterator\)函数中 , 支持动态的调用不同的next\(\) , hasNext\(\)实现 . 
+
+#### Duck-typing来实现多态特性
+
+```py
+class Logger:
+    def record(self):
+        
+```
 
 
 
